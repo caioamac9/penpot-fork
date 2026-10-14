@@ -27,8 +27,12 @@ O resultado fica em http://localhost:9000/dashboard?id=penpot-fork.
 
 ## Limitações conhecidas
 
-- O plugin 0.1.4 quebra ao montar a tabela de símbolos de
-  `backend/src/app/rpc/commands/audit.clj`, então a navegação de símbolos e o
-  taint entre funções ficam desligados (`sonar.clojure.kondo.analysisPaths`).
+- O plugin 0.1.4 quebra ao montar a tabela de símbolos quando uma referência
+  coincide com a própria declaração (código gerado por macro, como em
+  `backend/src/app/rpc/commands/audit.clj`). O `filtrar-simbolos.py` remove
+  essas referências (cerca de 400) antes do scanner.
+- A análise de taint do opengrep só roda com o
+  [opengrep](https://github.com/opengrep/opengrep/releases) no PATH.
 - Sem relatórios de cobertura (cloverage) e de testes (kaocha), a métrica de
-  completude da análise fica em 25%.
+  completude da análise fica em 50%.
+- O scanner usa até 4 GB de heap; o Docker precisa de pelo menos 8 GB.
