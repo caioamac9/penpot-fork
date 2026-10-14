@@ -13,7 +13,7 @@ mkdir -p target
 
 # 1) Hooks de segurança do plugin para o clj-kondo (vêm dentro do jar)
 rm -rf .clj-kondo/imports/net.typemark
-unzip -qo "$JAR" 'clj-kondo.exports/net.typemark/*' -d target/plugin
+unzip -qo "$JAR" 'clj-kondo.exports/net.typemark/**' -d target/plugin
 mkdir -p .clj-kondo/imports
 cp -r target/plugin/clj-kondo.exports/net.typemark .clj-kondo/imports/
 
